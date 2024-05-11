@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\Master\AkunTelegramController;
+use App\Http\Controllers\Api\Master\Kitir\KitirReController;
+use App\Http\Controllers\Api\Master\KitirController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Master\PangkalanController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,4 +19,14 @@ use App\Http\Controllers\Api\Master\PangkalanController;
 */
 
 Route::get('/pangkalan', [PangkalanController::class, 'pangkalan']);
+
+
+
+
+Route::get('/kitir', [KitirController::class, 'index']);
+Route::get('/kitirpertanggalkitir/{tanggal}', [KitirController::class, 'kitir_pertanggal_kitir']);
+Route::get('/kitirpertanggalmasuk/{tanggal}', [KitirController::class, 'kitir_pertanggal_masuk']);
+Route::get('/kitirpecah/{tanggal}', [KitirReController::class, 'kitir_pecah']);
+
+Route::get('/akuntelegram', [AkunTelegramController::class, 'index']);
 

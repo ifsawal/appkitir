@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Api\Master;
 
-use App\Http\Controllers\Controller;
 use App\Models\Pangkalan;
 use Illuminate\Http\Request;
+use App\Fungsi\Respon\Respon;
+use App\Http\Controllers\Controller;
 
 class PangkalanController extends Controller
 {
     public function pangkalan(){
-        return Pangkalan::all();
+        $Pangkalan=Pangkalan::all();
+        Respon::respon($Pangkalan);
     }
 
 
