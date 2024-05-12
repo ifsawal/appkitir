@@ -27,6 +27,7 @@ Route::get('/kitir', [KitirController::class, 'index']);
 Route::get('/kitirpertanggalkitir/{tanggal}', [KitirController::class, 'kitir_pertanggal_kitir']);
 Route::get('/kitirpertanggalmasuk/{tanggal}', [KitirController::class, 'kitir_pertanggal_masuk']);
 Route::get('/kitirpecah/{tanggal}', [KitirReController::class, 'kitir_pecah']);
+Route::get('/kitir-pecah-tgl-masuk/{tanggal}', [KitirReController::class, 'kitir_pecah_tgl_masuk']);
 
 Route::get('/akuntelegram', [AkunTelegramController::class, 'index']);
 
