@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\Master\AkunTelegramController;
-use App\Http\Controllers\Api\Master\Kitir\KitirReController;
-use App\Http\Controllers\Api\Master\KitirController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Master\KitirController;
 use App\Http\Controllers\Api\Master\PangkalanController;
+use App\Http\Controllers\Api\Master\AkunTelegramController;
+use App\Http\Controllers\Api\Master\Kitir\KitirReController;
+use App\Http\Controllers\Api\Master\Cashback\CashbackReController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,7 @@ Route::get('/kitirpecah/{tanggal}', [KitirReController::class, 'kitir_pecah']);
 Route::get('/kitir-pecah-tgl-masuk/{tanggal}', [KitirReController::class, 'kitir_pecah_tgl_masuk']);
 
 Route::get('/akuntelegram', [AkunTelegramController::class, 'index']);
+
+
+Route::get('/data-cashback-semua-pangkalan-perbulan/{bulan}/{tahun}', [CashbackReController::class,'data_cashback_semua_pangkalan_perbulan']);
 
