@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Cashback;
 use App\Models\Pangkalan;
 use App\Models\KitirPenjualanBriva;
 use Illuminate\Database\Eloquent\Model;
@@ -21,4 +22,8 @@ class KitirPenjualan extends Model
     	return $this->belongsTo(KitirPenjualanBriva::class, 'id', 'kitir_penjualan_ID');
     }
 
+    // public function cashback()
+    // {
+    // 	return $this->hasOne(Cashback::class, 'id', 'kitir_penjualan_id');
+    // }
 }
