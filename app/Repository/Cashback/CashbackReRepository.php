@@ -19,6 +19,9 @@ class CashbackReRepository
             'jenis_cashback.status',
             'nama_cashback.nama as nama_cashback',
             'nama_cashback.jumlah',
+            'pangkalan.norek',
+            'pangkalan.nama_rek',
+            'pangkalan.nama_bank',
         );
 
         $rekap->join('jenis_cashback', 'jenis_cashback.id_pang', '=', 'pangkalan.id_pang');
@@ -46,6 +49,9 @@ class CashbackReRepository
             $pang[] = [
                 "id_pang" => $p['id_pang'],
                 "pangkalan" => $p['nama'],
+                "no_rek" => $p['norek'],
+                "nama_rek" => $p['nama_rek'],
+                "nama_bank" => $p['nama_bank'],
                 "status" => $p['status'],
                 "nama_cashback" => $p['nama_cashback'],
                 "besaran_cashback" => $p['jumlah'],
@@ -67,6 +73,8 @@ class CashbackReRepository
             'jenis_cashback.status',
             'nama_cashback.nama as nama_cashback',
             'nama_cashback.jumlah',
+            'pangkalan.norek',
+            'pangkalan.nama_rek',
         );
 
         $rekap->join('jenis_cashback', 'jenis_cashback.id_pang', '=', 'pangkalan.id_pang');
