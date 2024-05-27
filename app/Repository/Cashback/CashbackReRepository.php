@@ -39,7 +39,7 @@ class CashbackReRepository
             ->where('bulan',$bulan)
             ->where('tahun',$tahun)
             ->first();
-            if($syarat){$syarat=" <font color=green><b>Syarat &#x2705 </b></font>";}else{$syarat="";}
+            if($syarat){$syarat="<font color=green><b>Syarat &#x2705 </b></font>";}else{$syarat="";}
             $penjualan = KitirPenjualan::whereYear('tanggal', '=', $tahun)
                 ->join('cashback', 'kitir_penjualan.id', '=', 'cashback.kitir_penjualan_id')
                 ->whereMonth('tanggal', '=', $bulan)
@@ -60,8 +60,8 @@ class CashbackReRepository
                 "nama_rek" => $p['nama_rek'],
                 "nama_bank" => $p['nama_bank'],
                 "status" => $p['status'],
-                "nama_cashback" => $p['nama_cashback'],
-                "besaran_cashback" => $p['jumlah'].$syarat,
+                "nama_cashback" => $syarat.$p['nama_cashback'],
+                "besaran_cashback" => $p['jumlah'],
                 "bayar" => $total,
                 "penjualan" => $penjualan,
             ];
