@@ -5,6 +5,7 @@ namespace App\Repository\Cashback;
 use App\Models\Pangkalan;
 use App\Models\TotalCashback;
 use App\Models\KitirPenjualan;
+use App\Models\SyaratCashback;
 
 class CashbackReRepository
 {
@@ -27,12 +28,18 @@ class CashbackReRepository
         $rekap->join('jenis_cashback', 'jenis_cashback.id_pang', '=', 'pangkalan.id_pang');
         $rekap->join('nama_cashback', 'nama_cashback.id', '=', 'jenis_cashback.nama_cashback_id');
         $rekap->where('jenis_cashback.status', '=', 'aktif');
+        // $rekap->orderBy('pangkalan.id_pang');
 
         $pangkalan = $rekap->get();
 
 
         $pang = array();
         foreach ($pangkalan as $p) {
+            $syarat=SyaratCashback::where('id_pang',$p['id_pang'])
+            ->where('bulan',$bulan)
+            ->where('tahun',$tahun)
+            ->first();
+            if($syarat){$syarat=" <font color=green><b>Syarat &#x2705 </b></font>";}else{$syarat="";}
             $penjualan = KitirPenjualan::whereYear('tanggal', '=', $tahun)
                 ->join('cashback', 'kitir_penjualan.id', '=', 'cashback.kitir_penjualan_id')
                 ->whereMonth('tanggal', '=', $bulan)
@@ -54,7 +61,7 @@ class CashbackReRepository
                 "nama_bank" => $p['nama_bank'],
                 "status" => $p['status'],
                 "nama_cashback" => $p['nama_cashback'],
-                "besaran_cashback" => $p['jumlah'],
+                "besaran_cashback" => $p['jumlah'].$syarat,
                 "bayar" => $total,
                 "penjualan" => $penjualan,
             ];
