@@ -36,11 +36,11 @@ class CashbackReRepository
 
         $pang = array();
         foreach ($pangkalan as $p) {
-            $syarat=SyaratCashback::where('id_pang',$p['id_pang'])
+            $syarat_cek=SyaratCashback::where('id_pang',$p['id_pang'])
             ->where('bulan',$bulan)
             ->where('tahun',$tahun)
             ->first();
-            if($syarat){$syarat="<font color=#009349><b>Syarat &#x2705 </b></font>";}else{$syarat="";}
+            if($syarat_cek && $p['status']==NULL){$syarat="<font color=#009349><b>Syarat &#x2705 </b></font>";}else{$syarat="";}
             $penjualan = KitirPenjualan::whereYear('tanggal', '=', $tahun)
                 ->join('cashback', 'kitir_penjualan.id', '=', 'cashback.kitir_penjualan_id')
                 ->whereMonth('tanggal', '=', $bulan)
