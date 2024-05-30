@@ -28,6 +28,7 @@ class CashbackReRepository
         $rekap->join('jenis_cashback', 'jenis_cashback.id_pang', '=', 'pangkalan.id_pang');
         $rekap->join('nama_cashback', 'nama_cashback.id', '=', 'jenis_cashback.nama_cashback_id');
         $rekap->where('jenis_cashback.status', '=', 'aktif');
+        $rekap->orderBy("pangkalan.nama");
         // $rekap->orderBy('pangkalan.id_pang');
 
         $pangkalan = $rekap->get();
