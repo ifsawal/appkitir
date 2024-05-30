@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SyaratCashback extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'syarat_cashback';
 }
