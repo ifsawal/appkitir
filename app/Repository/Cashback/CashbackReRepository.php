@@ -36,11 +36,11 @@ class CashbackReRepository
 
         $pang = array();
         foreach ($pangkalan as $p) {
-            $syarat_cek=SyaratCashback::where('id_pang',$p['id_pang'])
-            ->where('bulan',$bulan)
-            ->where('tahun',$tahun)
-            ->first();
-            if($syarat_cek && $p['bayar']==NULL){$syarat="<font color=#009349><b>Syarat &#x2705 </b></font>";}else{$syarat="";}
+            $syarat_cek = SyaratCashback::where('id_pang', $p['id_pang'])
+                ->where('bulan', $bulan)
+                ->where('tahun', $tahun)
+                ->first();
+
             $penjualan = KitirPenjualan::whereYear('tanggal', '=', $tahun)
                 ->join('cashback', 'kitir_penjualan.id', '=', 'cashback.kitir_penjualan_id')
                 ->whereMonth('tanggal', '=', $bulan)
@@ -54,6 +54,12 @@ class CashbackReRepository
                 ->where('id_pang', '=', $p['id_pang'])
                 ->first();
 
+            if ($syarat_cek && !$total) {   //jika ada sarat DAN total tidak ditemukan
+                $syarat = "<font color=#009349><b>Syarat &#x2705 </b></font>";
+            } else {
+                $syarat = "";
+            }
+
             $pang[] = [
                 "id_pang" => $p['id_pang'],
                 "pangkalan" => $p['nama'],
@@ -61,7 +67,7 @@ class CashbackReRepository
                 "nama_rek" => $p['nama_rek'],
                 "nama_bank" => $p['nama_bank'],
                 "status" => $p['status'],
-                "nama_cashback" => $syarat.$p['nama_cashback'],
+                "nama_cashback" => $syarat . $p['nama_cashback'],
                 "besaran_cashback" => $p['jumlah'],
                 "bayar" => $total,
                 "penjualan" => $penjualan,
@@ -105,11 +111,11 @@ class CashbackReRepository
                 ->where('bulan', '=', $bulan)
                 ->where('id_pang', '=', $p['id_pang'])
                 ->first();
-            $sudah_bayar="Sudah dibayar";
-                if (!$total)  {
+            $sudah_bayar = "Sudah dibayar";
+            if (!$total) {
                 $total['jumlah'] = "";
-                $sudah_bayar="";
-                }
+                $sudah_bayar = "";
+            }
 
             $pen = "";
             $total_hitung = 0;
