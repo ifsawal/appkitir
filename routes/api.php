@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Master\PangkalanController;
 use App\Http\Controllers\Api\Master\AkunTelegramController;
 use App\Http\Controllers\Api\Master\Kitir\KitirReController;
 use App\Http\Controllers\Api\Master\Cashback\CashbackReController;
+use App\Http\Controllers\Api\Master\Kitir\LaporanPenjualanPecahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::get('/kitirpertanggalkitir/{tanggal}', [KitirController::class, 'kitir_pe
 Route::get('/kitirpertanggalmasuk/{tanggal}', [KitirController::class, 'kitir_pertanggal_masuk']);
 Route::get('/kitirpecah/{tanggal}', [KitirReController::class, 'kitir_pecah']);
 Route::get('/kitir-pecah-tgl-masuk/{tanggal}', [KitirReController::class, 'kitir_pecah_tgl_masuk']);
+
+Route::get('/laporan-pecah/{bulan}/{tahun}', [LaporanPenjualanPecahController::class, 'laporan_pecah']);
+Route::get('/download-laporan-pecah/{bulan}/{tahun}', [LaporanPenjualanPecahController::class, 'download']);
 
 Route::get('/akuntelegram', [AkunTelegramController::class, 'index']);
 

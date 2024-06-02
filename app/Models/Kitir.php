@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Pangkalan;
+use App\Models\KitirBriva;
 use App\Models\KitirPecah;
 use App\Models\BagiPangkalan;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +27,11 @@ class Kitir extends Model
     public function bagi_pangkalan()
     {
         return $this->belongsTo(BagiPangkalan::class, 'id_k', 'id_k');
+    }
+
+    public function kitir_briva()
+    {
+        return $this->hasOne(KitirBriva::class, 'id_k', 'id_k');
     }
 
 
