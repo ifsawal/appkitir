@@ -32,6 +32,7 @@ class LaporanPenjualanPecahRepository
 
         $belumterjualperpangkalan = 0;
         $terjual_masi_sisa = 0;
+        $nama_belum_laku="";
         foreach ($kitir as $k) {
 
             $jumlah_pec = 0;
@@ -42,14 +43,17 @@ class LaporanPenjualanPecahRepository
             if (!$k['kitir_briva']) {  //jika tida ada penjualan sesuai kitir. maka proses
                 if (count($k['kitir_pecah']) == 0) {
                     $belumterjualperpangkalan++;
+                    $nama_belum_laku.=$k['pangkalan']['nama'].":".$k['tgl_tanggal'].":".$k['tgl_masuk']." ";
                 }
                 if ($k['jumlah'] !== $jumlah_pec and count($k['kitir_pecah']) !== 0) {
                     $terjual_masi_sisa++;
+                    $nama_belum_laku.=$k['pangkalan']['nama'].":".$k['tanggal'].":".$k['tgl_masuk']." ";
                 }
             }
         }
 
         return $hasil = [
+            "nama belum terjual" => $nama_belum_laku,
             "belumterjual" => $belumterjualperpangkalan,
             "belumterjual_ada_sisa" => $terjual_masi_sisa,
             "total_pangkalan_belum_terjual" => $belumterjualperpangkalan + $terjual_masi_sisa,
