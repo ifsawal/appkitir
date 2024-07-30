@@ -8,6 +8,7 @@ use App\Fungsi\Respon\Respon;
 use App\Http\Controllers\Controller;
 use Rap2hpoutre\FastExcel\FastExcel;
 use OpenSpout\Common\Entity\Style\Style;
+use OpenSpout\Common\Entity\Style\Border;
 use App\Repository\Kitir\LaporanPenjualanPecahRepository;
 
 class LaporanPenjualanPecahController extends Controller
@@ -49,14 +50,14 @@ class LaporanPenjualanPecahController extends Controller
                         "Pecah" => "",
                         "Total\nJumlah Pecah" => "",
                         "No Pch" => $n,
-                        "Tgl Transfer" => date("Y-m-d",strtotime($k['penjualan']['briva']['tanggal_tf'])),
-                        "Nama Pecah" => $k['penjualan']['pangkalan']['nama']."\n" ,
+                        "Ref" => $k['kitir_penjualan_id'],
+                        "Tgl Transfer" => date("Y-m-d", strtotime($k['penjualan']['briva']['tanggal_tf'])),
+                        "Nama Pecah" => $k['penjualan']['pangkalan']['nama'] . "\n",
                         "Jumlah\nPecah" => $k['jumlah'],
+                        "Jumlah\nbeli" => $k['penjualan']['jumlah'],
                         "Total bayar" => $jml_byr,
                         "Status\nBayar" => $status_byr,
                     ];
-
-
                 }
             }
 
@@ -69,9 +70,11 @@ class LaporanPenjualanPecahController extends Controller
                 "Pecah" => $pecah,
                 "Total\nJumlah Pecah" => $jumlah_pecah,
                 "No Pch" => "",
-                "Tgl Transfer" =>"",
+                "Ref" => "",
+                "Tgl Transfer" => "",
                 "Nama Pecah" => "",
                 "Jumlah\nPecah" => "",
+                "Jumlah\nbeli" => "",
                 "Total bayar" => "",
                 "Status\nBayar" => "",
 
@@ -89,9 +92,11 @@ class LaporanPenjualanPecahController extends Controller
                 "Pecah" => "",
                 "Total\nJumlah Pecah" => "",
                 "No Pch" => "",
+                "Ref" => "",
                 "Tgl Transfer" => "",
                 "Nama Pecah" => "",
                 "Jumlah\nPecah" => "",
+                "Jumlah\nbeli" => "",
                 "Total bayar" => "",
                 "Status\nBayar" => "",
             ];
@@ -99,10 +104,16 @@ class LaporanPenjualanPecahController extends Controller
 
         $hasil = collect($p);
 
-        $header_style = (new Style())->setFontBold();
+        $header_style = (new Style())->setFontBold()->setBackgroundColor("e5eae1");
+
         return FastExcel($hasil)
             ->headerStyle($header_style)
-            
+
+            // ->configureWriterUsing(function ($writer) {
+            //     $options2 = $writer->getOptions();
+            //     $options2->setColumnWidth(100,1);
+            // })
+
             ->download("Laporan_" . $bulan . "_" . $tahun . ".xlsx");
     }
 }

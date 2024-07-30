@@ -9,7 +9,7 @@ use App\Models\SyaratCashback;
 
 class CashbackReRepository
 {
-    public static function data_cashback($bulan, $tahun)
+    public static function data_cashback($bulan, $tahun, $filter = "all")
     {
         // $bulan=date("Y-m-d H:i:s",strtotime("2024-".$bulan."-1 10:10:10"));
 
@@ -36,6 +36,8 @@ class CashbackReRepository
 
         $pang = array();
         foreach ($pangkalan as $p) {
+
+
             $syarat_cek = SyaratCashback::where('id_pang', $p['id_pang'])
                 ->where('bulan', $bulan)
                 ->where('tahun', $tahun)
@@ -53,6 +55,13 @@ class CashbackReRepository
                 ->where('bulan', '=', $bulan)
                 ->where('id_pang', '=', $p['id_pang'])
                 ->first();
+
+            if ($filter == "syarat-ok") {
+                if ($syarat_cek  && !$total) {
+                } else {
+                    continue;
+                }
+            }
 
             if ($syarat_cek && !$total) {   //jika ada sarat DAN total tidak ditemukan
                 $syarat = "<font color=#009349><b>Syarat &#x2705 </b></font>";
