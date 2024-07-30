@@ -9,7 +9,7 @@ use App\Models\SyaratCashback;
 
 class CashbackReRepository
 {
-    public static function data_cashback($bulan, $tahun, $filter = "all")
+    public static function data_cashback($bulan, $tahun, $filter = "all", $status_bayar = "all")
     {
         // $bulan=date("Y-m-d H:i:s",strtotime("2024-".$bulan."-1 10:10:10"));
 
@@ -55,6 +55,20 @@ class CashbackReRepository
                 ->where('bulan', '=', $bulan)
                 ->where('id_pang', '=', $p['id_pang'])
                 ->first();
+
+            if ($status_bayar == "sudah-bayar") {
+                if ($total == NULL) {
+                    continue;
+                } else {
+                }
+            }
+
+            if ($status_bayar == "belum-bayar") {
+                if ($total == NULL) {
+                } else {
+                    continue;
+                }
+            }
 
             if ($filter == "syarat-ok") {
                 if ($syarat_cek  && !$total) {

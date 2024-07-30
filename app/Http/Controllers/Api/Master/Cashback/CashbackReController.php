@@ -19,9 +19,9 @@ use Illuminate\Http\Request;
 
 class CashbackReController extends Controller
 {
-    public function data_cashback_semua_pangkalan_perbulan($bulan, $tahun,$filter="all")
+    public function data_cashback_semua_pangkalan_perbulan($bulan, $tahun,$filter="all",$status_bayar="all")
     {
-        $data = CashbackReRepository::data_cashback($bulan, $tahun,$filter);
+        $data = CashbackReRepository::data_cashback($bulan, $tahun,$filter,$status_bayar);
         return Respon::respon($data);
     }
 

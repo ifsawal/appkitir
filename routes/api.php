@@ -37,7 +37,7 @@ Route::get('/download-laporan-pecah/{bulan}/{tahun}', [LaporanPenjualanPecahCont
 Route::get('/akuntelegram', [AkunTelegramController::class, 'index']);
 
 
-Route::get('/data-cashback-semua-pangkalan-perbulan/{bulan}/{tahun}/{filter?}', [CashbackReController::class,'data_cashback_semua_pangkalan_perbulan']);
+Route::get('/data-cashback-semua-pangkalan-perbulan/{bulan}/{tahun}/{filter?}/{status_bayar?}', [CashbackReController::class,'data_cashback_semua_pangkalan_perbulan']);
 Route::get('/download/{bulan}/{tahun}', [CashbackReController::class,'download']);
 Route::get('/kirim/{bulan}/{tahun}', [CashbackReController::class,'kirim']);
 Route::post('/tandai-ok', [CashbackReController::class,'tandai_ok']);
